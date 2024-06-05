@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { invoke } from '@tauri-apps/api/tauri';
+import DirectoryContext from '../context/DirectoryContext';
 import "./MusicList.css";
 
-
-function MusicList({ searchParam, directory }) {
+function MusicList({ searchParam }) {
   const [musicFiles, setMusicFiles] = useState([]);
+  const { directory } = useContext(DirectoryContext);
 
   useEffect(() => {
     async function fetchMusicFiles() {
         try {
+          if (!directory) return;
+
           const files = await invoke('get_music_files', { directory });
           setMusicFiles(files);
         } catch (error) {

@@ -42,6 +42,13 @@ body {
   border: #ffffffd6;
 }
 
+.current-dir {
+  position: absolute;
+  top: 4%;
+  left: 22%;
+  display: flex;
+}
+
 ul {
   list-style-type: none;
   padding: 0;

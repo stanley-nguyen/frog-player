@@ -1,8 +1,10 @@
-import React from 'react'
+import { useContext } from 'react'
+import DirectoryContext from '../context/DirectoryContext';
 
 function PlaylistPage() {
+  const { directory } = useContext(DirectoryContext);
   return (
-    <div>PlaylistPage</div>
+    <div>PlaylistPage {directory}</div>
   )
 }
 
