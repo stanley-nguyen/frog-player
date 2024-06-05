@@ -1,0 +1,25 @@
+.search-bar {
+    width: 14.7%;
+    height: 2.5%;
+    position: fixed;
+    z-index: 1;
+    top: 8%;
+    left: 3%;
+    border: 1px solid black;
+  }
+  
+  input,
+  input::placeholder {
+    font-size: 70%;
+    color: white;
+    background-color: #0f0f0f98;
+  }
+  
+  input::placeholder {
+    opacity: 50%;
+  }
+  
+  input:focus {
+    border: 1px solid rgba(100, 60, 255, 0.8);
+    outline: none;
+  }

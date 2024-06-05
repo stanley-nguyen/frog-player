@@ -1,0 +1,15 @@
+.music-list {
+    height: 100%;
+    width: 100;
+    font-size: 24px;
+    overflow-y: scroll;
+    color: #a9a9a9;
+    background: transparent;
+    scrollbar-width: thin;
+    scrollbar-color: #ffffff1a #0000001a;
+}
+
+li:nth-child(odd) {
+    background-color: #0000001a;
+    color: #778899;
+}

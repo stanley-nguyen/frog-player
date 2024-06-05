@@ -1,0 +1,23 @@
+.title-bar {
+    height: 30px;
+    background: linear-gradient(to right, #1a2a3f5e 10%, #3a4b6f3b 90%);
+    user-select: none;
+    display: flex;
+    justify-content: flex-end;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+  
+.title-bar-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 30px;
+  }
+
+.title-bar-button:hover {
+    background: #0084b039;
+  }

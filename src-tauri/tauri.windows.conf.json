@@ -1,0 +1,15 @@
+{
+    "tauri": {
+        "windows": [
+            {
+                "title": "frog-player",
+                "width": 1280,
+                "height": 720,
+                "resizable": true,
+                "fullscreen": false,
+                "decorations": false
+            }
+        ]
+    }
+}
+  

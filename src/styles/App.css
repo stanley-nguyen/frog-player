@@ -1,0 +1,44 @@
+:root {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+
+  color: #0f0f0f;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.App {
+  height: 100vh;
+  background: linear-gradient(to right, #0A192F 10%, #27314F 90%);
+  background-size: cover;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color: #f6f6f6;
+  }
+
+  a:hover {
+    color: #24c8db;
+  }
+}

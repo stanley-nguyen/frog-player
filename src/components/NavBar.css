@@ -1,0 +1,22 @@
+.sidenav {
+    width: 15%;
+    position: fixed;
+    z-index: 1;
+    top: 13%;
+    left: 3%;
+    border: 1px solid black;
+  }
+  
+  .sidenav a {
+    display: block;
+    padding: 10px;
+    text-decoration: double;
+    color: white;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+  }
+  
+  .sidenav a:hover {
+    color: rgba(100, 60, 255, 0.8);
+  }
