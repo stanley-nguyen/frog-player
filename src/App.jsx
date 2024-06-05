@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -12,16 +12,21 @@ import DirectoryButton from './components/DirectoryButton';
 import DirectoryContext from './context/DirectoryContext';
 
 import "./styles/App.css";
+import QuestionLogo from './assets/circle-question-regular.svg';
 
 function App() {
   const [searchParam, setSearchParam] = useState("");
   const [directory, setDirectory] = useState("");
 
   if (directory)
-    localStorage.setItem("directory", directory);
+    useEffect(() => {
+      localStorage.setItem("directory", directory);
+    }, [directory]);
 
-  if (!directory && localStorage.getItem("directory")) 
-    setDirectory(localStorage.getItem("directory"));
+  if (!directory && localStorage.getItem("directory"))
+    useEffect(() => {
+      setDirectory(localStorage.getItem("directory"));
+    }, [directory]); 
 
   return (
     <>
@@ -33,7 +38,10 @@ function App() {
             <NavBar/>
             <DirectoryButton/>
             <div className='current-dir'>Current directory:
-              <p className='current-dir-path'>{directory}</p>
+              <div className='dir-tooltip'>
+                <img className='dir-tooltip-img' src={QuestionLogo}/>
+                <span className='dir-tooltip-text'>{directory}</span>
+              </div>
             </div>
             <Routes>
               <Route path="/" element={<HomePage searchParam={searchParam}/>} />

@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import DirectoryContext from '../context/DirectoryContext';
 import { open } from '@tauri-apps/api/dialog';
 
+import './DirectoryButton.css';
+
 export default function DirectoryButton() {
   const { directory, setDirectory } = useContext(DirectoryContext);
 

@@ -25,28 +25,49 @@ body {
   background-size: cover;
 }
 
-.dir-button {
-  position: absolute;
-  right: 3%;
-  top: 6%;
-  height: 4.5%;
-  width: 10%;
-  font-weight: bold;
-  background: #07c1ff80;
-  border-radius: 10px;
-  border: #0084b039;
-}
-
-.dir-button:hover {
-  background: #0084b039;
-  border: #ffffffd6;
-}
-
 .current-dir {
   position: absolute;
-  top: 4%;
+  top: 6%;
   left: 22%;
-  display: flex;
+  display: inline-block;
+  width: 20%;
+  height: 3.5%;
+  font-size: 100%;
+}
+
+.dir-tooltip-img {
+  position: absolute;
+  font-size: 4%;
+  left: 90%;
+  top: 10%;
+}
+
+.dir-tooltip-text {
+  visibility: hidden;
+  font-size: 10px;
+  width: max-content;
+  padding-left: 3%;
+  padding-right: 3%;
+  font-weight: 500;
+  background-color: #1E2A3A;
+  color: #F0F4F8;
+  display: inline-block;
+  text-align: center;
+  border: 1px solid #3A475A;
+  left: 105%;
+  top: 10%;
+  border-radius: 3px;
+
+  position: absolute;
+  z-index: 2;
+}
+
+.dir-tooltip:hover .dir-tooltip-text {
+  visibility: visible;
+}
+
+.dir-tooltip:hover {
+  cursor: pointer;
 }
 
 ul {
