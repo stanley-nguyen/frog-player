@@ -3,9 +3,8 @@ import { invoke } from '@tauri-apps/api/tauri';
 import "./MusicList.css";
 
 
-function MusicList({ searchParam }) {
+function MusicList({ searchParam, directory }) {
   const [musicFiles, setMusicFiles] = useState([]);
-  const [directory, setDirectory] = useState("");
 
   useEffect(() => {
     async function fetchMusicFiles() {
