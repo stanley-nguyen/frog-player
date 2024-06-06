@@ -30,6 +30,10 @@
       },
       "dialog": {
         "open": true
+      },
+      "protocol": {
+        "asset": true,
+        "assetScope": ["**"]
       }
     },
     "windows": [

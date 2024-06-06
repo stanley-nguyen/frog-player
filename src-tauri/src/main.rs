@@ -2,23 +2,26 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::fs;
+use std::collections::HashMap;
 
 // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
 #[tauri::command]
-fn get_music_files(directory: &str) -> Vec<String> {
+fn get_music_files(directory: &str) -> HashMap<String, String> {
     if directory.is_empty() {
-        return Vec::new();
+        return HashMap::new();
     }
 
     let files = fs::read_dir(directory).unwrap();
 
-    let mut music_files: Vec<String> = Vec::new();
+    let mut music_files: HashMap<String, String> = HashMap::new();
     let extensions: Vec<&str> = vec![".mp3", ".m4a", ".wav", ".flac", ".ogg", ".aac"];
 
     for file in files {
-        let file_name = file.unwrap().file_name().into_string().unwrap();
+        let file_entry = file.unwrap();
+        let file_name = file_entry.file_name().into_string().unwrap();
+        let file_path = file_entry.path().to_str().unwrap().to_string();
         if extensions.iter().any(|&ext| file_name.ends_with(ext)) {
-            music_files.push(file_name);
+            music_files.insert(file_name, file_path);
         }
     }
     return music_files;

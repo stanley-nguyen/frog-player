@@ -7,9 +7,15 @@
     background: transparent;
     scrollbar-width: thin;
     scrollbar-color: #ffffff1a #0000001a;
+    user-select: none;
 }
 
 li:nth-child(odd) {
     background-color: #0000001a;
     color: #778899;
+}
+
+.selected {
+    background-color: #2C3E50 !important;
+    color: #F0E68C !important;
 }

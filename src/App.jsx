@@ -8,6 +8,7 @@ import SearchBar from './components/SearchBar';
 import HomePage from './pages/HomePage';
 import PlaylistPage from './pages/PlaylistPage';
 import DirectoryButton from './components/DirectoryButton';
+import MusicPlayer from './components/MusicPlayer';
 
 import DirectoryContext from './context/DirectoryContext';
 
@@ -17,6 +18,8 @@ import QuestionLogo from './assets/circle-question-regular.svg';
 function App() {
   const [searchParam, setSearchParam] = useState("");
   const [directory, setDirectory] = useState("");
+  const [isPlaying, setIsPlaying] = useState("");
+  const [currentSong, setCurrentSong] = useState("");
 
   if (directory)
     useEffect(() => {
@@ -31,7 +34,9 @@ function App() {
   return (
     <>
       <TitleBar/>
-      <DirectoryContext.Provider value={{directory, setDirectory}}>
+      <DirectoryContext.Provider value={{directory, setDirectory,
+                                         isPlaying, setIsPlaying,
+                                         currentSong, setCurrentSong}}>
         <Router>
           <div className='App'>
             <SearchBar searchParam={searchParam} onSearchChange={setSearchParam} />
@@ -47,6 +52,7 @@ function App() {
               <Route path="/" element={<HomePage searchParam={searchParam}/>} />
               <Route path="/playlists" element={<PlaylistPage/>} />
             </Routes>
+            <MusicPlayer/>
           </div>
         </Router>
       </DirectoryContext.Provider>
