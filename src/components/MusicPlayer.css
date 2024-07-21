@@ -1,7 +1,40 @@
 .player-controls {
     position: absolute;
-    height: 3%;
-    width: 5%;
+    height: 4.5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    bottom: 5.25%;
+}
+
+.progress-wrapper {
+    position: absolute;
+    height: 0.5%;
+    width: 90%;
+    bottom: 2.5%;
     left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: left;
+    border: black solid;
+    border-radius: 10px;
+    background: #0e004e68;
+}
+
+.player-controls-progress-bar {
+    position: absolute;
+    height: 100%;
+    background-color: #5337ce95;
+}
+
+.player-controls-toggle {
+    position: absolute;
+    height: 100%;
     bottom: 0%;
+}
+
+.player-controls-time {
+    position: absolute;
+    bottom: 0%;
+    font-size: 12px;
 }
