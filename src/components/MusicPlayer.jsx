@@ -1,6 +1,7 @@
 import { useRef, useContext, useEffect, useState } from 'react';
 import DirectoryContext from '../context/DirectoryContext';
 import { FaRegPlayCircle, FaRegPauseCircle, FaBackward, FaForward, FaVolumeUp, FaVolumeMute, FaVolumeOff } from "react-icons/fa";
+import { Forward5Rounded, Replay5Rounded } from '@mui/icons-material';
 import './MusicPlayer.css';
 
 const secToTime = (totalSeconds) => {
@@ -44,6 +45,7 @@ function MusicPlayer() {
 
   useEffect(() => {
     if (!currentSong) return;
+
     audioElement.current.volume = currentVolume / 100;
   }, [currentVolume, setCurrentVolume]);
 
@@ -57,9 +59,7 @@ function MusicPlayer() {
 
   const onSeek = (e) => {
     if (!currentSong) return;
-    // console.log(audioElement.current.currentTime)
-    // audioElement.current.currentTime = e.target.value;
-    // setCurrentDuration(e.target.value);
+    audioElement.current.currentTime += e;
   };
 
   return (
@@ -68,8 +68,8 @@ function MusicPlayer() {
         {isPlaying ? <FaRegPauseCircle className='player-controls-toggle' onClick={() => setIsPlaying(!isPlaying)} size={40}/> :
                     <FaRegPlayCircle className='player-controls-toggle' onClick={() => setIsPlaying(!isPlaying)} size={40}/>}
         <div className='player-controls-seek'>
-          <FaBackward className='player-controls-backward' onClick={onSeek(-5)}/>
-          <FaForward className='player-controls-forward' onClick={onSeek(5)}/>
+          <Replay5Rounded className='player-controls-backward' onClick={() => onSeek(-5)} sx={{ fontSize: 30 }}/>
+          <Forward5Rounded className='player-controls-forward' onClick={() => onSeek(5)} sx={{ fontSize: 30 }}/>
         </div>
         <div className='player-controls-volume'>
           {isMuted   ? <FaVolumeMute className='player-controls-vbutton' onClick={() => setIsMuted(!isMuted)} size={25}/> :
