@@ -43,7 +43,6 @@ function MusicList({ searchParam }) {
         const fileUrl = convertFileSrc(fileName);
 
         setCurrentSong(fileUrl);
-        setIsPlaying(true);
       }
     } catch (error) {
       console.error("Error playing music file:", error);

@@ -20,23 +20,47 @@ function App() {
   const [directory, setDirectory] = useState("");
   const [isPlaying, setIsPlaying] = useState("");
   const [currentSong, setCurrentSong] = useState("");
+  const [currentDuration, setCurrentDuration] = useState("");
+  const [totalDuration, setTotalDuration] = useState("");
+  const [isMuted, setIsMuted] = useState("");
+  const [currentVolume, setCurrentVolume] = useState("");
 
-  if (directory)
-    useEffect(() => {
+  useEffect(() => {
+    if (directory)
       localStorage.setItem("directory", directory);
-    }, [directory]);
-
-  if (!directory && localStorage.getItem("directory"))
-    useEffect(() => {
+    else if (!directory && localStorage.getItem("directory"))
       setDirectory(localStorage.getItem("directory"));
-    }, [directory]); 
+  }, [directory]);
+
+  useEffect(() => {
+    if (currentSong)
+      localStorage.setItem("isPlaying", isPlaying);
+  }, [isPlaying]);
+
+  useEffect(() => {
+    if (currentSong)
+    {
+      localStorage.setItem("currentSong", currentSong);
+      localStorage.setItem("currentDuration", currentDuration);
+    }
+    else if (!currentSong && localStorage.getItem("currentSong"))
+    {
+      setCurrentSong(localStorage.getItem("currentSong"));
+      // setIsPlaying(localStorage.getItem("isPlaying"));
+      setCurrentDuration(localStorage.getItem("currentDuration"));
+    }
+  }, [currentSong]);
 
   return (
     <>
       <TitleBar/>
       <DirectoryContext.Provider value={{directory, setDirectory,
                                          isPlaying, setIsPlaying,
-                                         currentSong, setCurrentSong}}>
+                                         currentSong, setCurrentSong,
+                                         currentDuration, setCurrentDuration,
+                                         totalDuration, setTotalDuration,
+                                         isMuted, setIsMuted,
+                                         currentVolume, setCurrentVolume}}>
         <Router>
           <div className='App'>
             <SearchBar searchParam={searchParam} onSearchChange={setSearchParam} />

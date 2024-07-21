@@ -31,10 +31,87 @@
     position: absolute;
     height: 100%;
     bottom: 0%;
+    z-index: 1;
 }
 
 .player-controls-time {
     position: absolute;
     bottom: 0%;
     font-size: 12px;
+}
+
+.player-controls-seek {
+    position: absolute;
+    width: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+}
+
+.player-controls-toggle:hover,
+.player-controls-backward:hover,
+.player-controls-forward:hover,
+.player-controls-vbutton:hover {
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.player-controls-volume {
+    position: relative;
+    top: 50%;
+    left: 30vh;
+    width: 30vh;
+    justify-content: center;
+    transform: translateY(-50%);
+    display: flex;
+}
+
+.player-controls-vbutton {
+    position: relative;
+    top: 50%;
+    display: inline-block;
+    transform: translateY(-50%);
+}
+
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    left: 3vh;
+}
+
+.slider-value {
+    position: absolute;
+    top: 51%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: white;
+}
+
+.player-controls-vslider {
+    position: relative;
+    display: inline-block;
+    left: 8%;
+    transform: translateY(-50%);
+    appearance: none;
+    cursor: pointer;
+    width: 100%;
+    height: 5px;
+    border-radius: 10px;
+    border: 1px solid #5E5E72;
+}
+
+.player-controls-vslider:focus {
+    border: 1px solid #4e6bff7e;
+}
+
+.player-controls-vslider::-webkit-slider-thumb {
+    appearance: none;
+    height: 15px;
+    width: 4px;
+    background-color: rgba(79, 79, 130, 0.9);
+}
+
+.player-controls-vslider:focus::-webkit-slider-thumb {
+    background-color: rgba(56, 56, 148, 0.9);
 }
