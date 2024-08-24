@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -11,56 +11,24 @@ import DirectoryButton from './components/DirectoryButton';
 import MusicPlayer from './components/MusicPlayer';
 
 import DirectoryContext from './context/DirectoryContext';
-
 import "./styles/App.css";
 import QuestionLogo from './assets/circle-question-regular.svg';
 
 function App() {
   const [searchParam, setSearchParam] = useState("");
   const [directory, setDirectory] = useState("");
-  const [isPlaying, setIsPlaying] = useState("");
-  const [currentSong, setCurrentSong] = useState("");
-  const [currentDuration, setCurrentDuration] = useState("");
-  const [totalDuration, setTotalDuration] = useState("");
-  const [isMuted, setIsMuted] = useState("");
-  const [currentVolume, setCurrentVolume] = useState("");
 
   useEffect(() => {
     if (directory)
       localStorage.setItem("directory", directory);
     else if (!directory && localStorage.getItem("directory"))
       setDirectory(localStorage.getItem("directory"));
-  }, [directory]);
-
-  useEffect(() => {
-    if (currentSong)
-      localStorage.setItem("isPlaying", isPlaying);
-  }, [isPlaying]);
-
-  useEffect(() => {
-    if (currentSong)
-    {
-      localStorage.setItem("currentSong", currentSong);
-      localStorage.setItem("currentDuration", currentDuration);
-    }
-    else if (!currentSong && localStorage.getItem("currentSong"))
-    {
-      setCurrentSong(localStorage.getItem("currentSong"));
-      // setIsPlaying(localStorage.getItem("isPlaying"));
-      setCurrentDuration(localStorage.getItem("currentDuration"));
-    }
-  }, [currentSong]);
+  }, []);
 
   return (
     <>
       <TitleBar/>
-      <DirectoryContext.Provider value={{directory, setDirectory,
-                                         isPlaying, setIsPlaying,
-                                         currentSong, setCurrentSong,
-                                         currentDuration, setCurrentDuration,
-                                         totalDuration, setTotalDuration,
-                                         isMuted, setIsMuted,
-                                         currentVolume, setCurrentVolume}}>
+      <DirectoryContext.Provider value={{directory, setDirectory}}>
         <Router>
           <div className='App'>
             <SearchBar searchParam={searchParam} onSearchChange={setSearchParam} />
@@ -76,6 +44,7 @@ function App() {
               <Route path="/" element={<HomePage searchParam={searchParam}/>} />
               <Route path="/playlists" element={<PlaylistPage/>} />
             </Routes>
+
             <MusicPlayer/>
           </div>
         </Router>

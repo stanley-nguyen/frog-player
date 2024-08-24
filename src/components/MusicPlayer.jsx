@@ -1,5 +1,5 @@
-import { useRef, useContext, useEffect, useState } from 'react';
-import DirectoryContext from '../context/DirectoryContext';
+import { useEffect } from 'react';
+import { useAudio } from '../context/AudioContext';
 import { FaRegPlayCircle, FaRegPauseCircle, FaBackward, FaForward, FaVolumeUp, FaVolumeMute, FaVolumeOff } from "react-icons/fa";
 import { Forward5Rounded, Replay5Rounded } from '@mui/icons-material';
 import './MusicPlayer.css';
@@ -16,50 +16,55 @@ const secToTime = (totalSeconds) => {
 };
 
 function MusicPlayer() {
-  const { isPlaying, setIsPlaying, currentSong, setCurrentSong, currentDuration, setCurrentDuration, totalDuration, setTotalDuration, isMuted, setIsMuted, currentVolume, setCurrentVolume } = useContext(DirectoryContext);
-
-  const audioElement = useRef(null);
+  const { audioSource, audioRef,
+          isPlaying, setIsPlaying,
+          currentSong, setCurrentSong,
+          currentDuration, setCurrentDuration,
+          totalDuration, setTotalDuration,
+          isMuted, setIsMuted,
+          currentVolume, setCurrentVolume } = useAudio();
 
   useEffect(() => {
-    if (!currentSong) return;
-
-    if (audioElement.current.src !== currentSong)
+    if (audioSource)
     {
-      audioElement.current.src = currentSong;
-      
-      isPlaying ? audioElement.current.play() : audioElement.current.pause();
+      setCurrentSong(audioSource)
     }
-  }, [currentSong, setCurrentSong]);
+  }, [audioSource]);
 
   useEffect(() => {
-    if (!currentSong) return;
+    if (!audioRef.current) return;
 
-    isPlaying ? audioElement.current.play() : audioElement.current.pause();
-  }, [isPlaying, setIsPlaying]);
+    if (audioRef.current.src !== currentSong)
+    {
+      audioRef.current.src = currentSong;
+    }
+
+    isPlaying ? audioRef.current.play() : audioRef.current.pause();
+    if (audioRef.current.currentTime === 0)
+    {
+      setCurrentDuration(0);
+    }
+  }, [currentSong, isPlaying]);
 
   useEffect(() => {
-    if (!currentSong) return;
-
-    isMuted ? audioElement.current.muted = true : audioElement.current.muted = false;
-  }, [isMuted, setIsMuted]);
+    if (!audioRef.current) return;
+    audioRef.current.muted = isMuted;
+  }, [isMuted]);
 
   useEffect(() => {
-    if (!currentSong) return;
-
-    audioElement.current.volume = currentVolume / 100;
-  }, [currentVolume, setCurrentVolume]);
+    if (!audioRef.current) return;
+    audioRef.current.volume = currentVolume / 100;
+  }, [currentVolume]);
 
   const onPlaying = () => {
-    const duration = audioElement.current.duration;
-    const currentTime = audioElement.current.currentTime;
-
-    setCurrentDuration(currentTime);
-    setTotalDuration(duration);
+    if (!audioRef.current) return;
+    setCurrentDuration(audioRef.current.currentTime);
+    setTotalDuration(audioRef.current.duration);
   };
 
   const onSeek = (e) => {
-    if (!currentSong) return;
-    audioElement.current.currentTime += e;
+    if (!audioRef.current) return;
+    audioRef.current.currentTime += e;
   };
 
   return (
@@ -84,7 +89,7 @@ function MusicPlayer() {
       <div className='progress-wrapper'>
         <div className='player-controls-progress-bar' style={{width: `${currentDuration / totalDuration * 100 +"%"}`}}></div>
       </div>
-      <audio ref={audioElement} onTimeUpdate={onPlaying}></audio>
+      <audio ref={audioRef} onTimeUpdate={onPlaying}></audio>
       <div className='player-controls-time'>
         {currentSong ? <span>{secToTime(currentDuration)} / {secToTime(totalDuration)}</span> :
                            <></>}

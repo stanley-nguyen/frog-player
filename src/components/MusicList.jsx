@@ -1,13 +1,14 @@
 import { useEffect, useState, useContext, useRef } from 'react';
 import { invoke } from '@tauri-apps/api/tauri';
-import DirectoryContext from '../context/DirectoryContext';
+import { useDir } from '../context/DirectoryContext';
+import { useAudio } from '../context/AudioContext';
 import "./MusicList.css";
 import { convertFileSrc } from '@tauri-apps/api/tauri';
 
 function MusicList({ searchParam }) {
   const [musicFiles, setMusicFiles] = useState([]);
-  const { setIsPlaying, setCurrentSong } = useContext(DirectoryContext);
-  const { directory } = useContext(DirectoryContext);
+  const { directory } = useDir();
+  const { setAudioSource } = useAudio();
 
   useEffect(() => {
     async function fetchMusicFiles() {
@@ -42,7 +43,7 @@ function MusicList({ searchParam }) {
         const fileName = musicFiles[e.target.innerText];
         const fileUrl = convertFileSrc(fileName);
 
-        setCurrentSong(fileUrl);
+        setAudioSource(fileUrl);
       }
     } catch (error) {
       console.error("Error playing music file:", error);

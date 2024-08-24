@@ -1,11 +1,12 @@
 import './Navbar.css';
+import { Link } from 'react-router-dom';
 
 function NavBar() {
   return (
     <nav className='sidenav'>
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/playlists">Playlists</a></li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/playlists">Playlists</Link></li>
       </ul>
     </nav>
   )
