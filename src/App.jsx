@@ -8,6 +8,7 @@ import SearchBar from './components/SearchBar';
 import HomePage from './pages/HomePage';
 import PlaylistPage from './pages/PlaylistPage';
 import DirectoryButton from './components/DirectoryButton';
+import PlayAllButton from './components/PlayAllButton';
 import MusicPlayer from './components/MusicPlayer';
 
 import DirectoryContext from './context/DirectoryContext';
@@ -34,6 +35,7 @@ function App() {
             <SearchBar searchParam={searchParam} onSearchChange={setSearchParam} />
             <NavBar/>
             <DirectoryButton/>
+            <PlayAllButton/>
             <div className='current-dir'>Current directory:
               <div className='dir-tooltip'>
                 <img className='dir-tooltip-img' src={QuestionLogo}/>

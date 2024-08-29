@@ -60,6 +60,10 @@ function MusicPlayer() {
     if (!audioRef.current) return;
     setCurrentDuration(audioRef.current.currentTime);
     setTotalDuration(audioRef.current.duration);
+
+    if (currentDuration > .995 * totalDuration) {
+      // playNextSong();
+    }
   };
 
   const onSeek = (e) => {

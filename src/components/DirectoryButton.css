@@ -8,9 +8,13 @@
     background: #07c1ff80;
     border-radius: 10px;
     border: #0084b039;
-  }
+}
   
-  .dir-button:hover {
-    background: #0084b039;
-    border: #ffffffd6;
-  }
+.dir-button:hover {
+  background: #00649796;
+  border: #ffffffd6;
+}
+
+.dir-button:active {
+  background: #0084b039;
+}

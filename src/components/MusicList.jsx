@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { invoke } from '@tauri-apps/api/tauri';
 import { useDir } from '../context/DirectoryContext';
 import { useAudio } from '../context/AudioContext';
@@ -10,20 +10,20 @@ function MusicList({ searchParam }) {
   const { directory } = useDir();
   const { setAudioSource } = useAudio();
 
-  useEffect(() => {
-    async function fetchMusicFiles() {
-        try {
-          if (!directory) return;
+  async function fetchMusicFiles() {
+    try {
+      if (!directory) return;
 
-          const files = await invoke('get_music_files', { directory });
+      const files = await invoke('get_music_files', { directory: directory });
 
-          setMusicFiles(files);
-        } catch (error) {
-          console.error("Error fetching music files:", error);
-        }
+      setMusicFiles(files);
+    } catch (error) {
+      console.error("Error fetching music files:", error);
     }
+  }
 
-  fetchMusicFiles();
+  useEffect(() => {
+    fetchMusicFiles();
   }, [directory]);
 
   async function handleClick(e) {

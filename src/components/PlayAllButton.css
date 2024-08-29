@@ -1,0 +1,21 @@
+.play-all-button {
+    position: absolute;
+    right: 15vw;
+    top: 6vh;
+    height: 4.5vh;
+    width: 8vw;
+    font-weight: bold;
+    font-size: 20px;
+    background: #40404080;
+    border-radius: 10px;
+    border: #000000;
+}
+
+.play-all-button:hover {
+    background: #3d3d3d39;
+    border: #ffffffd6;
+}
+
+.play-all-button:active {
+    background: #00000039;
+}
