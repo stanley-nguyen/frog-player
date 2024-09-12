@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { invoke } from '@tauri-apps/api/tauri';
 import { useDir } from '../context/DirectoryContext';
 import { useAudio } from '../context/AudioContext';
+import { useQueue } from '../context/QueueContext';
 import "./MusicList.css";
 import { convertFileSrc } from '@tauri-apps/api/tauri';
 
@@ -9,6 +10,7 @@ function MusicList({ searchParam }) {
   const [musicFiles, setMusicFiles] = useState([]);
   const { directory } = useDir();
   const { setAudioSource } = useAudio();
+  const { queue, setQueue } = useQueue();
 
   async function fetchMusicFiles() {
     try {
@@ -41,6 +43,9 @@ function MusicList({ searchParam }) {
         e.target.classList.add('selected');
 
         const fileName = musicFiles[e.target.innerText];
+        const musicArray = [...Object.values(musicFiles).sort()]
+        setQueue(musicArray.slice(musicArray.indexOf(fileName)));
+
         const fileUrl = convertFileSrc(fileName);
 
         setAudioSource(fileUrl);

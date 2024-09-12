@@ -1,13 +1,15 @@
 import './PlayAllButton.css';
 import { useDir } from '../context/DirectoryContext'
 import { invoke } from '@tauri-apps/api/tauri';
+import { useQueue } from '../context/QueueContext'
 
 function PlayAllButton() {
     const { directory } = useDir();
+    const { queue, setQueue } = useQueue();
 
     async function playAll() {
-        const files = await invoke('get_music_files', { directory: directory });
-        console.log(files);
+        const files = Object.values(await invoke('get_music_files', { directory: directory })).sort();
+        setQueue(files);
     }
 
     return (

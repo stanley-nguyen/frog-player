@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useAudio } from '../context/AudioContext';
+import { useQueue } from '../context/QueueContext';
 import { FaRegPlayCircle, FaRegPauseCircle, FaBackward, FaForward, FaVolumeUp, FaVolumeMute, FaVolumeOff } from "react-icons/fa";
 import { Forward5Rounded, Replay5Rounded } from '@mui/icons-material';
 import './MusicPlayer.css';
@@ -23,6 +24,8 @@ function MusicPlayer() {
           totalDuration, setTotalDuration,
           isMuted, setIsMuted,
           currentVolume, setCurrentVolume } = useAudio();
+
+  const { queue, setQueue } = useQueue();
 
   useEffect(() => {
     if (audioSource)
@@ -62,7 +65,7 @@ function MusicPlayer() {
     setTotalDuration(audioRef.current.duration);
 
     if (currentDuration > .995 * totalDuration) {
-      // playNextSong();
+      playNextSong();
     }
   };
 
@@ -70,6 +73,14 @@ function MusicPlayer() {
     if (!audioRef.current) return;
     audioRef.current.currentTime += e;
   };
+
+  const playNextSong = () => {
+    if (queue.length > 0) {
+      const nextSong = queue[0];
+      setCurrentSong(nextSong);
+      setQueue(queue.slice(1));
+    }
+  }
 
   return (
     <>
