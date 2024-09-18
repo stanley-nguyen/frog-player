@@ -4,9 +4,10 @@ Frog Player is a lightweight, local music player desktop app for Windows built w
 
 ## Features
 
-- Play local music from a selected directory
-- Play, pause, navigate, and adjust volume with player controls.
-- Search for specific music
+- [x] Play local music from a selected directory
+- [x] Play, pause, navigate, and adjust volume with player controls.
+- [x] Search for specific music
+- [ ] Create custom playlists
 
 ## Screenshots
 <img src="images/1.jpg"/>
